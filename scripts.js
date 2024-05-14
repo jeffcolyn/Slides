@@ -1,35 +1,34 @@
-let btnNext = document.querySelector('.next');
-let btnBack = document.querySelector('.back');
+let btnNext = document.querySelector('.arrows .next');
+        let btnBack = document.querySelector('.arrows .back');
 
-let listContainer = document.querySelector('.container');
-let listItems = listContainer.querySelectorAll('.List-item');
-let thumbnailContainer = document.querySelector('.container .thumb');
-let thumbnailItems = thumbnailContainer.querySelectorAll('.thumb-item');
+        let container = document.querySelector('.container');
+        let list = document.querySelector('.list');
+        let thumb = document.querySelector('.thumb');
 
-btnNext.addEventListener('click', () => moveItemsOnClick('next'));
-btnBack.addEventListener('click', () => moveItemsOnClick('back'));
+        btnNext.addEventListener('click', function () {
+            moveItemsOnClick('next');
+        });
 
-function moveItemsOnClick(type) {
-    let listItems = listContainer.querySelectorAll('.List-item');
-    let thumbnailItems = thumbnailContainer.querySelectorAll('.thumb-item');
+        btnBack.addEventListener('click', function () {
+            moveItemsOnClick('back');
+        });
 
-    if (!listContainer || !listItems || !thumbnailContainer || !thumbnailItems) {
-        console.error('Elements not found');
-        return;
-    }
+        function moveItemsOnClick(type) {
+            let listItems = document.querySelectorAll('.list .list-item');
+            let thumbItems = document.querySelectorAll('.thumb .thumb-item');
 
-    if (type === 'next') {
-        listContainer.classList.add('next');
-        listContainer.appendChild(listItems[0]);
-        thumbnailContainer.appendChild(thumbnailItems[0]);
-    } else {
-        listContainer.classList.add('back');
-        listContainer.prepend(listItems[listItems.length - 1]);
-        thumbnailContainer.prepend(thumbnailItems[thumbnailItems.length - 1]);
-    }
+            if (type === 'next') {
+                list.appendChild(listItems[0]);
+                thumb.appendChild(thumbItems[0]);
+                container.classList.add('next');
+            } else {
+                list.prepend(listItems[listItems.length - 1]);
+                thumb.prepend(thumbItems[thumbItems.length - 1]);
+                container.classList.add('back');
+            }
 
-    setTimeout(() => {
-        listContainer.classList.remove('next');
-        listContainer.classList.remove('back');
-    }, 3000);
-}
+            setTimeout(() => {
+                container.classList.remove('next');
+                container.classList.remove('back');
+            }, 3000);
+        }
